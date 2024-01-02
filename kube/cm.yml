@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-credentials
+  namespace: factory
+  labels:
+    app: keycloak
+data:
+  DB_VENDOR:  'POSTGRES'
+  DB_ADDR:  'postgres'
+  DB_DATABASE: 'keycloak'
+  DB_USER: 'keycloak'
+  DB_SCHEMA: 'public'
+  DB_PASSWORD: 'password'
+  KEYCLOAK_USER: 'admin'
+  KEYCLOAK_PASSWORD: 'Pa55w0rd'

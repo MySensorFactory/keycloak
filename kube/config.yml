@@ -1,0 +1,4 @@
+order:
+  - cm.yml
+  - svc.yml
+  - deploy.yml

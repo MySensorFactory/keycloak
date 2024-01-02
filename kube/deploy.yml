@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-deployment
+  namespace: factory
+  labels:
+    app: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+        - name: keycloak
+          imagePullPolicy: Always
+          image: quay.io/keycloak/keycloak:legacy
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_VENDOR
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-credentials
+                  key: DB_VENDOR
+            - name: DB_ADDR
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-credentials
+                  key: DB_ADDR
+            - name: DB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-credentials
+                  key: DB_DATABASE
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-credentials
+                  key: DB_USER
+            - name: DB_SCHEMA
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-credentials
+                  key: DB_SCHEMA
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-credentials
+                  key: DB_PASSWORD
+            - name: KEYCLOAK_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-credentials
+                  key: KEYCLOAK_USER
+            - name: KEYCLOAK_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-credentials
+                  key: KEYCLOAK_PASSWORD
